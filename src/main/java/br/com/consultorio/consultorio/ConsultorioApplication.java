@@ -2,6 +2,7 @@ package br.com.consultorio.consultorio;
 
 import br.com.consultorio.consultorio.Entity.*;
 import br.com.consultorio.consultorio.Repository.*;
+import br.com.consultorio.consultorio.dto.PatientResultDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -92,8 +93,8 @@ public class ConsultorioApplication {
 
         turnRepository.saveAll(turnList);
 
-//        Collection<Patient> findAllPatients = patientRepository.findAllPatients(new Date());
-//        System.out.println(findAllPatients);
+        Collection<PatientResultDTO> findAllPatients = patientRepository.findAllPatients(LocalDate.of(2021, Month.JULY, 21));
+        System.out.println(findAllPatients);
     }
 
 }
