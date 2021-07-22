@@ -93,6 +93,7 @@ public class ConsultorioApplication {
 
         turnRepository.saveAll(turnList);
 
+        /*================================================Exercício 1================================================*/
         Collection<PatientResultDTO> findAllPatients = patientRepository.findAllPatients(LocalDate.of(2021, Month.JULY, 21));
         System.out.println(findAllPatients);
     }
