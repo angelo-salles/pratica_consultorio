@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -27,7 +28,7 @@ public class Dentist {
     private String dni;
 
     @Column(name = "birth_date")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     private String phone;
 
@@ -36,7 +37,7 @@ public class Dentist {
     @Column(name = "code_mp")
     private String codeMp;
 
-    public Dentist(String name, String lastName, String address, String dni, Date birthDate, String phone, String email, String codeMp) {
+    public Dentist(String name, String lastName, String address, String dni, LocalDate birthDate, String phone, String email, String codeMp) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
