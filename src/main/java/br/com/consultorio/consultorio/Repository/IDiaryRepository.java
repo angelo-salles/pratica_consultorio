@@ -13,6 +13,6 @@ import java.util.Collection;
 @Repository
 public interface IDiaryRepository extends JpaRepository<Diary, Long> {
 
-  @Query("")
-  Collection<DiaryResultDTO> findAllAppointmentsDentistInADay(LocalDate day, Long dentistId);
+//  @Query("")
+//  Collection<DiaryResultDTO> findAllAppointmentsDentistInADay(LocalDate day, Long dentistId);
 }

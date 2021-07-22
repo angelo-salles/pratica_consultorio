@@ -12,6 +12,6 @@ import java.util.Collection;
 @Repository
 public interface IDentistRepository extends JpaRepository<Dentist, Long> {
 
-  @Query("")
-  Collection<DentistResultDTO> findAllDentistsWithMoreThanOneAppointmentInADay(LocalDate day);
+//  @Query("")
+//  Collection<DentistResultDTO> findAllDentistsWithMoreThanOneAppointmentInADay(LocalDate day);
 }

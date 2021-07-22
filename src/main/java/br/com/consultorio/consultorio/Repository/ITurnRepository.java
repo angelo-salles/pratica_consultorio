@@ -13,6 +13,6 @@ import java.util.Collection;
 @Repository
 public interface ITurnRepository extends JpaRepository<Turn, Long> {
 
-  @Query("")
-  Collection<TurnResultDTO> findAllTurnsByStatus(TurnStatusEnum status);
+//  @Query("")
+//  Collection<TurnResultDTO> findAllTurnsByStatus(TurnStatusEnum status);
 }
