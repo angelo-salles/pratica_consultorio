@@ -13,6 +13,10 @@ import java.util.Collection;
 @Repository
 public interface IDiaryRepository extends JpaRepository<Diary, Long> {
 
-//  @Query("")
-//  Collection<DiaryResultDTO> findAllAppointmentsDentistInADay(LocalDate day, Long dentistId);
+  @Query("SELECT new br.com.consultorio.consultorio.dto.DiaryResultDTO(d.startTime, d.endingTime," +
+          "dt.name, dt.codeMp)\n" +
+          "FROM Diary d\n" +
+          "INNER JOIN d.dentist dt\n" +
+          "WHERE dt.id = :dentistId")
+  Collection<DiaryResultDTO> findAllAppointmentsDentistInADay(Long dentistId);
 }

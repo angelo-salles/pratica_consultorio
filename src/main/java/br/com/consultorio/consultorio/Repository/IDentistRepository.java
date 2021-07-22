@@ -12,6 +12,13 @@ import java.util.Collection;
 @Repository
 public interface IDentistRepository extends JpaRepository<Dentist, Long> {
 
-//  @Query("")
-//  Collection<DentistResultDTO> findAllDentistsWithMoreThanOneAppointmentInADay(LocalDate day);
+  @Query("SELECT new br.com.consultorio.consultorio.dto.DentistResultDTO(d.id, d.name," +
+          "d.lastName, d.address, d.dni, d.birthDate, d.phone, d.email, d.codeMp)\n" +
+          "FROM Turn t\n" +
+          "INNER JOIN t.diary dr\n" +
+          "INNER JOIN dr.dentist d\n" +
+          "WHERE t.day = :day\n" +
+          "GROUP BY d.id, d.name, d.lastName, d.address, d.dni, d.birthDate, d.phone, d.email, d.codeMp\n" +
+          "HAVING COUNT(t.diary) >= 2")
+  Collection<DentistResultDTO> findAllDentistsWithMoreThanOneAppointmentInADay(LocalDate day);
 }

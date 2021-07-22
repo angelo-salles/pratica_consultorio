@@ -2,7 +2,10 @@ package br.com.consultorio.consultorio;
 
 import br.com.consultorio.consultorio.Entity.*;
 import br.com.consultorio.consultorio.Repository.*;
+import br.com.consultorio.consultorio.dto.DentistResultDTO;
+import br.com.consultorio.consultorio.dto.DiaryResultDTO;
 import br.com.consultorio.consultorio.dto.PatientResultDTO;
+import br.com.consultorio.consultorio.dto.TurnResultDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -59,8 +62,9 @@ public class ConsultorioApplication {
         TurnStatus statusConcluido = new TurnStatus(TurnStatusEnum.CONCLUIDO, "Atendimento concluído");
         TurnStatus statusCancelado = new TurnStatus(TurnStatusEnum.CANCELADO, "Atendimento cancelado");
         TurnStatus statusPendente = new TurnStatus(TurnStatusEnum.PENDENTE, "Atendimento pendente");
+        TurnStatus statusRemarcado = new TurnStatus(TurnStatusEnum.REMARCADO, "Atendimento remarcado");
 
-        List<TurnStatus> turnStatusList = new ArrayList<>(Arrays.asList(statusConcluido, statusCancelado, statusPendente));
+        List<TurnStatus> turnStatusList = new ArrayList<>(Arrays.asList(statusConcluido, statusCancelado, statusPendente, statusRemarcado));
 
         turnStatusRepository.saveAll(turnStatusList);
 
@@ -79,7 +83,16 @@ public class ConsultorioApplication {
         Diary diary5 = new Diary(LocalDateTime.of(2021, Month.JULY, 20, 14, 0),
                 LocalDateTime.of(2021, Month.JULY, 20, 14, 30), dentist5);
 
-        List<Diary> diaryList = new ArrayList<>(Arrays.asList(diary1, diary2, diary3, diary4, diary5));
+        Diary diary6 = new Diary(LocalDateTime.of(2021, Month.JULY, 21, 14, 30),
+                LocalDateTime.of(2021, Month.JULY, 21, 15, 00), dentist1);
+
+        Diary diary7 = new Diary(LocalDateTime.of(2021, Month.JULY, 21, 14, 30),
+                LocalDateTime.of(2021, Month.JULY, 21, 15, 00), dentist1);
+
+        Diary diary8 = new Diary(LocalDateTime.of(2021, Month.JULY, 21, 14, 30),
+                LocalDateTime.of(2021, Month.JULY, 21, 15, 00), dentist2);
+
+        List<Diary> diaryList = new ArrayList<>(Arrays.asList(diary1, diary2, diary3, diary4, diary5, diary6, diary7, diary8));
 
         diaryRepository.saveAll(diaryList);
 
@@ -88,8 +101,11 @@ public class ConsultorioApplication {
         Turn turn3 = new Turn(LocalDate.of(2021, Month.JULY, 21), statusConcluido, diary2, patient3);
         Turn turn4 = new Turn(LocalDate.of(2021, Month.JULY, 21), statusPendente, diary4, patient1);
         Turn turn5 = new Turn(LocalDate.of(2021, Month.JULY, 22), statusPendente, diary3, patient4);
+        Turn turn6 = new Turn(LocalDate.of(2021, Month.JULY, 21), statusPendente, diary6, patient4);
+        Turn turn7 = new Turn(LocalDate.of(2021, Month.JULY, 21), statusRemarcado, diary7, patient4);
+        Turn turn8 = new Turn(LocalDate.of(2021, Month.JULY, 21), statusRemarcado, diary8, patient4);
 
-        List<Turn> turnList = new ArrayList<>(Arrays.asList(turn1, turn2, turn3, turn4, turn5));
+        List<Turn> turnList = new ArrayList<>(Arrays.asList(turn1, turn2, turn3, turn4, turn5, turn6, turn7, turn8));
 
         turnRepository.saveAll(turnList);
 
@@ -98,19 +114,33 @@ public class ConsultorioApplication {
         System.out.println(findAllPatients);
 
         /*================================================Exercício 2================================================*/
-
+        Collection<DentistResultDTO> dentistResultDTOS = dentistRepository.findAllDentistsWithMoreThanOneAppointmentInADay(LocalDate.of(2021, Month.JULY, 21));
+        System.out.println(dentistResultDTOS);
 
         /*================================================Exercício 3================================================*/
 
+        Collection<TurnResultDTO> concludedTurns = turnRepository.findAllTurnsByStatus(TurnStatusEnum.CONCLUIDO);
+        System.out.println(concludedTurns);
 
         /*================================================Exercício 4================================================*/
 
+        Collection<TurnResultDTO> pendingTurnsOfADay = turnRepository.findAllPendingTurnsOfADay(LocalDate.of(2021, Month.JULY, 21));
+        System.out.println(pendingTurnsOfADay);
 
         /*================================================Exercício 5================================================*/
 
+        Collection<DiaryResultDTO> diaryResultDTOS = diaryRepository.findAllAppointmentsDentistInADay(1L);
+        System.out.println(diaryResultDTOS);
 
         /*================================================Exercício 6================================================*/
 
+        Collection<TurnResultDTO> remarkedStatusOfADentist = turnRepository.findAllRemarkedStatusOfADentist(1L);
+        System.out.println(remarkedStatusOfADentist);
+
+        /*================================================Exercício 7================================================*/
+
+        Collection<TurnResultDTO> remarkedStatus = turnRepository.findAllTurnsByStatus(TurnStatusEnum.REMARCADO);
+        System.out.println(remarkedStatus);
 
     }
 
