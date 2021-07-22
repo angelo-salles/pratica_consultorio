@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "turns")
@@ -15,6 +16,8 @@ public class Turn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_turn")
     private Long id;
+
+    private Date day;
 
     @ManyToOne
     @JoinColumn(name = "id_turn_status")
@@ -28,7 +31,8 @@ public class Turn {
     @JoinColumn(name = "id_patient")
     private Patient patient;
 
-    public Turn(TurnStatus turnStatus, Diary diary, Patient patient) {
+    public Turn(Date day, TurnStatus turnStatus, Diary diary, Patient patient) {
+        this.day = day;
         this.turnStatus = turnStatus;
         this.diary = diary;
         this.patient = patient;
