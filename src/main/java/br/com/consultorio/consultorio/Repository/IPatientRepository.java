@@ -21,5 +21,5 @@ public interface IPatientRepository extends JpaRepository<Patient, Long> {
             "INNER JOIN t.diary d\n" +
             "WHERE ts.name = 'CONCLUIDO'\n" +
             "AND t.day = :day")
-    Collection<PatientResultDTO> findAllPatients(LocalDate day);
+    Collection<PatientResultDTO> findAllPatientsWithConcludedAppointment(LocalDate day);
 }
