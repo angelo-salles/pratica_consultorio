@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -27,13 +28,13 @@ public class Patient {
     private String dni;
 
     @Column(name = "birth_date")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     private String phone;
 
     private String email;
 
-    public Patient(String name, String lastName, String address, String dni, Date birthDate, String phone, String email) {
+    public Patient(String name, String lastName, String address, String dni, LocalDate birthDate, String phone, String email) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
