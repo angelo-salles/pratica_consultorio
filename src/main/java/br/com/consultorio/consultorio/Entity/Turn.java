@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,7 @@ public class Turn {
     @Column(name = "id_turn")
     private Long id;
 
-    private Date day;
+    private LocalDate day;
 
     @ManyToOne
     @JoinColumn(name = "id_turn_status")
@@ -31,7 +32,7 @@ public class Turn {
     @JoinColumn(name = "id_patient")
     private Patient patient;
 
-    public Turn(Date day, TurnStatus turnStatus, Diary diary, Patient patient) {
+    public Turn(LocalDate day, TurnStatus turnStatus, Diary diary, Patient patient) {
         this.day = day;
         this.turnStatus = turnStatus;
         this.diary = diary;
